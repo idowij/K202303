@@ -1,0 +1,54 @@
+{{>layout/header}}
+
+<div id="posts_list">
+	<div class="sort_comm" data-option-type="sort">
+		{{#recency}}
+		<a href="/posts/search?keyword={{keyword}}&page=1&dataSort=accuracy" class="btn">정확도순</a>
+		{{/recency}}
+		{{^recency}}
+		<a href="/posts/search?keyword={{keyword}}&page=1&dataSort=accuracy" class="btn disabled">정확도순</a>
+		{{/recency}}
+		<span class="ico_dot"></span>
+		{{#accuracy}}
+		<a href="/posts/search?keyword={{keyword}}&page=1&dataSort=recency" class="btn">최신순</a>
+		{{/accuracy}}
+		{{^accuracy}}
+		<a href="/posts/search?keyword={{keyword}}&page=1&dataSort=recency" class="btn disabled">최신순</a>
+		{{/accuracy}}
+		</div>
+    <table id="table" class="table table-horizontal">
+        <thead id="thead">
+        </thead>
+        <tbody id="tbody">
+        {{#searchList}}
+            <tr>
+                <td class="tit_main"><a href="{{url}}" target="_blank">{{title}}</a><br>{{contents}}</td>
+                <td><img src="{{thumbnail}}" width="100px;" height="100px;" onerror="this.src='/img/noimage.png';"></td>
+                <td>{{blogname}}<br/>{{datetime}}</td>
+            </tr>
+        {{/searchList}}
+        </tbody>
+    </table>
+    <div class="text-right">
+    </div>
+    
+
+    {{! Search Paging }}
+    <div class="pagination justify-content-center">
+        {{#hasPrev}}
+            <a href="/posts/search?keyword={{keyword}}&page={{previous}}&dataSort={{dataSort}}" role="button" class="btn btn-lg bi bi-caret-left-square-fill"></a>
+        {{/hasPrev}}
+        {{^hasPrev}}
+            <a href="/posts/search?keyword={{keyword}}&page={{previous}}&dataSort={{dataSort}}" role="button" class="btn btn-lg bi bi-caret-left-square-fill disabled"></a>
+        {{/hasPrev}}
+
+        {{#hasNext}}
+            <a href="/posts/search?keyword={{keyword}}&page={{next}}&dataSort={{dataSort}}" role="button" class="btn btn-lg bi bi-caret-right-square-fill"></a>
+        {{/hasNext}}
+        {{^hasNext}}
+            <a href="/posts/search?keyword={{keyword}}&page={{next}}&dataSort={{dataSort}}" role="button" class="btn btn-lg bi bi-caret-right-square-fill disabled"></a>
+        {{/hasNext}}
+    </div>
+
+</div>
+{{>layout/footer}}
